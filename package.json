@@ -1,6 +1,6 @@
 {
   "name": "@dare/ss",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server wrapping Semantic Scholar API — citation tracing, paper metadata, recommendations",
   "type": "module",
   "scripts": {
