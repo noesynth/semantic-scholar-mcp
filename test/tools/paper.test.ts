@@ -74,13 +74,22 @@ describe('ssPaper', () => {
     expect(url).toContain('ARXIV:1706.03762');
   });
 
-  it('handles DOI format', async () => {
+  it('converts arXiv DOI to ARXIV format', async () => {
     globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_PAPER }]);
     const client = new SSClient();
     await ssPaper(client, { paper_id: 'DOI:10.48550/arXiv.1706.03762' });
 
     const url = (globalThis.fetch as any).mock.calls[0][0] as string;
-    expect(url).toContain('DOI:');
+    expect(url).toContain('/paper/ARXIV:1706.03762');
+  });
+
+  it('handles non-arXiv DOI format', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_PAPER }]);
+    const client = new SSClient();
+    await ssPaper(client, { paper_id: 'DOI:10.1145/3292500.3330919' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('DOI:10.1145');
   });
 
   it('returns paper with null abstract gracefully', async () => {
@@ -109,13 +118,13 @@ describe('ssPaper', () => {
     expect(url).toContain('/paper/ARXIV:2005.14165');
   });
 
-  it('auto-prefixes bare DOI', async () => {
+  it('converts bare arXiv DOI to ARXIV format', async () => {
     globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_PAPER }]);
     const client = new SSClient();
     await ssPaper(client, { paper_id: '10.48550/arXiv.1706.03762' });
 
     const url = (globalThis.fetch as any).mock.calls[0][0] as string;
-    expect(url).toContain('/paper/DOI:10.48550');
+    expect(url).toContain('/paper/ARXIV:1706.03762');
   });
 });
 

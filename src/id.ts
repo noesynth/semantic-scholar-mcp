@@ -16,13 +16,19 @@ const S2_HEX = /^[0-9a-f]{40}$/i;
 const BARE_ARXIV = /^\d{4}\.\d{4,5}(v\d+)?$/;
 const BARE_DOI = /^10\.\d{4,}\//;
 const BARE_URL = /^https?:\/\//i;
+const ARXIV_DOI = /^10\.48550\/arXiv\.(.+)$/i;
 
 export function parsePaperId(input: string): ParsedPaperId {
   const trimmed = input.trim();
 
   for (const prefix of PREFIXES) {
     if (trimmed.toLowerCase().startsWith(prefix.toLowerCase() + ':')) {
-      return { kind: prefix, raw: trimmed, formatted: `${prefix}:${trimmed.slice(prefix.length + 1)}` };
+      const value = trimmed.slice(prefix.length + 1);
+      if (prefix === 'DOI') {
+        const m = value.match(ARXIV_DOI);
+        if (m) return { kind: 'ARXIV', raw: trimmed, formatted: `ARXIV:${m[1]}` };
+      }
+      return { kind: prefix, raw: trimmed, formatted: `${prefix}:${value}` };
     }
   }
 
@@ -35,6 +41,8 @@ export function parsePaperId(input: string): ParsedPaperId {
   }
 
   if (BARE_DOI.test(trimmed)) {
+    const m = trimmed.match(ARXIV_DOI);
+    if (m) return { kind: 'ARXIV', raw: trimmed, formatted: `ARXIV:${m[1]}` };
     return { kind: 'DOI', raw: trimmed, formatted: `DOI:${trimmed}` };
   }
 

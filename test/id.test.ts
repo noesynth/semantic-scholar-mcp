@@ -9,10 +9,17 @@ describe('parsePaperId', () => {
     expect(r.raw).toBe('ARXIV:2005.14165');
   });
 
-  it('detects prefixed DOI', () => {
+  it('converts prefixed arXiv DOI to ARXIV kind', () => {
     const r = parsePaperId('DOI:10.48550/arXiv.2005.14165');
+    expect(r.kind).toBe('ARXIV');
+    expect(r.formatted).toBe('ARXIV:2005.14165');
+    expect(r.raw).toBe('DOI:10.48550/arXiv.2005.14165');
+  });
+
+  it('keeps prefixed non-arXiv DOI as DOI kind', () => {
+    const r = parsePaperId('DOI:10.1145/3292500.3330919');
     expect(r.kind).toBe('DOI');
-    expect(r.formatted).toBe('DOI:10.48550/arXiv.2005.14165');
+    expect(r.formatted).toBe('DOI:10.1145/3292500.3330919');
   });
 
   it('detects prefixed PMID', () => {
@@ -65,10 +72,17 @@ describe('parsePaperId', () => {
     expect(r.formatted).toBe('ARXIV:2005.14165v3');
   });
 
-  it('detects bare DOI and adds prefix', () => {
+  it('converts bare arXiv DOI to ARXIV kind', () => {
     const r = parsePaperId('10.48550/arXiv.2005.14165');
+    expect(r.kind).toBe('ARXIV');
+    expect(r.formatted).toBe('ARXIV:2005.14165');
+    expect(r.raw).toBe('10.48550/arXiv.2005.14165');
+  });
+
+  it('keeps bare non-arXiv DOI as DOI kind', () => {
+    const r = parsePaperId('10.1145/3292500.3330919');
     expect(r.kind).toBe('DOI');
-    expect(r.formatted).toBe('DOI:10.48550/arXiv.2005.14165');
+    expect(r.formatted).toBe('DOI:10.1145/3292500.3330919');
   });
 
   it('detects bare https URL and adds prefix', () => {
