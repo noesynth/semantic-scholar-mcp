@@ -99,6 +99,24 @@ describe('ssPaper', () => {
 
     expect(result.error).toBe('not_found');
   });
+
+  it('auto-prefixes bare arXiv ID', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_PAPER }]);
+    const client = new SSClient();
+    await ssPaper(client, { paper_id: '2005.14165' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('/paper/ARXIV:2005.14165');
+  });
+
+  it('auto-prefixes bare DOI', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_PAPER }]);
+    const client = new SSClient();
+    await ssPaper(client, { paper_id: '10.48550/arXiv.1706.03762' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('/paper/DOI:10.48550');
+  });
 });
 
 describe('ssPaperBatch', () => {

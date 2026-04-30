@@ -1,11 +1,13 @@
 import type { SSClient } from '../client.js';
 import { PAPER_FIELDS } from '../fields.js';
+import { parsePaperId } from '../id.js';
 
 export async function ssPaper(
   client: SSClient,
   args: { paper_id: string },
 ): Promise<unknown> {
-  return client.get(`/paper/${args.paper_id}`, {
+  const id = parsePaperId(args.paper_id).formatted;
+  return client.get(`/paper/${id}`, {
     fields: PAPER_FIELDS,
   });
 }

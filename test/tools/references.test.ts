@@ -130,6 +130,15 @@ describe('ssReferences', () => {
     expect(url).toContain('contexts');
     expect(url).toContain('intents');
   });
+
+  it('auto-prefixes bare arXiv ID', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_REFERENCES }]);
+    const client = new SSClient();
+    await ssReferences(client, { paper_id: '1706.03762' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('/paper/ARXIV:1706.03762/references');
+  });
 });
 
 describe('ssCitations', () => {
@@ -156,5 +165,14 @@ describe('ssCitations', () => {
     const url = (globalThis.fetch as any).mock.calls[0][0] as string;
     expect(url).toContain('citingPaper.title');
     expect(url).toContain('contexts');
+  });
+
+  it('auto-prefixes bare arXiv ID', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: REALISTIC_CITATIONS }]);
+    const client = new SSClient();
+    await ssCitations(client, { paper_id: '1706.03762' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('/paper/ARXIV:1706.03762/citations');
   });
 });
