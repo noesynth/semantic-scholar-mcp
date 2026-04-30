@@ -71,7 +71,7 @@ describe('ssPaper', () => {
     await ssPaper(client, { paper_id: 'ARXIV:1706.03762' });
 
     const url = (globalThis.fetch as any).mock.calls[0][0] as string;
-    expect(url).toContain('ARXIV%3A1706.03762');
+    expect(url).toContain('ARXIV:1706.03762');
   });
 
   it('handles DOI format', async () => {
@@ -80,7 +80,7 @@ describe('ssPaper', () => {
     await ssPaper(client, { paper_id: 'DOI:10.48550/arXiv.1706.03762' });
 
     const url = (globalThis.fetch as any).mock.calls[0][0] as string;
-    expect(url).toContain('DOI%3A');
+    expect(url).toContain('DOI:');
   });
 
   it('returns paper with null abstract gracefully', async () => {

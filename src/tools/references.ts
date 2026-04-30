@@ -19,7 +19,7 @@ export async function ssReferences(
     offset: String(args.offset ?? 0),
     limit: String(Math.min(args.limit ?? 100, 1000)),
   };
-  return client.get(`/paper/${encodeURIComponent(args.paper_id)}/references`, params);
+  return client.get(`/paper/${args.paper_id}/references`, params);
 }
 
 export async function ssCitations(
@@ -31,5 +31,5 @@ export async function ssCitations(
     offset: String(args.offset ?? 0),
     limit: String(Math.min(args.limit ?? 100, 1000)),
   };
-  return client.get(`/paper/${encodeURIComponent(args.paper_id)}/citations`, params);
+  return client.get(`/paper/${args.paper_id}/citations`, params);
 }

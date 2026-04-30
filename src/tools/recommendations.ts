@@ -12,7 +12,7 @@ async function resolveToS2Id(client: SSClient, paperId: string): Promise<string 
   const hasPrefix = /^(ARXIV|DOI|PMID|PMCID|ACL|CorpusId|URL):/i.test(paperId);
   if (!hasPrefix && /^[0-9a-f]{40}$/i.test(paperId)) return paperId;
 
-  const result = await client.get<{ paperId: string }>(`/paper/${encodeURIComponent(paperId)}`, { fields: 'paperId' });
+  const result = await client.get<{ paperId: string }>(`/paper/${paperId}`, { fields: 'paperId' });
   if (isSSError(result)) return null;
   return result.paperId;
 }
@@ -42,8 +42,8 @@ export async function ssRecommendations(
   if (negativeIds.length > 0) body.negativePaperIds = negativeIds;
 
   const limit = Math.min(args.limit ?? 100, 500);
-  return client.post('/recommendations/v1/papers/', body, {
+  return client.post('/papers/', body, {
     fields: PAPER_FIELDS,
     limit: String(limit),
-  });
+  }, true);
 }

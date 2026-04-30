@@ -33,9 +33,9 @@ export class SSClient {
     return h;
   }
 
-  async get<T = unknown>(path: string, params?: Record<string, string>): Promise<T | SSError> {
-    const base = path.startsWith('/recommendations') ? RECS_BASE : GRAPH_BASE;
-    const url = new URL(path, base);
+  async get<T = unknown>(path: string, params?: Record<string, string>, useRecsBase = false): Promise<T | SSError> {
+    const base = useRecsBase ? RECS_BASE : GRAPH_BASE;
+    const url = new URL(base + path);
     if (params) {
       for (const [k, v] of Object.entries(params)) {
         url.searchParams.set(k, v);
@@ -44,9 +44,9 @@ export class SSClient {
     return this.request<T>(url.toString(), { method: 'GET' });
   }
 
-  async post<T = unknown>(path: string, body: unknown, params?: Record<string, string>): Promise<T | SSError> {
-    const base = path.startsWith('/recommendations') ? RECS_BASE : GRAPH_BASE;
-    const url = new URL(path, base);
+  async post<T = unknown>(path: string, body: unknown, params?: Record<string, string>, useRecsBase = false): Promise<T | SSError> {
+    const base = useRecsBase ? RECS_BASE : GRAPH_BASE;
+    const url = new URL(base + path);
     if (params) {
       for (const [k, v] of Object.entries(params)) {
         url.searchParams.set(k, v);

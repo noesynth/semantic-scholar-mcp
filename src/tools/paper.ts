@@ -5,7 +5,7 @@ export async function ssPaper(
   client: SSClient,
   args: { paper_id: string },
 ): Promise<unknown> {
-  return client.get(`/paper/${encodeURIComponent(args.paper_id)}`, {
+  return client.get(`/paper/${args.paper_id}`, {
     fields: PAPER_FIELDS,
   });
 }
