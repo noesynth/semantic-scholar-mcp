@@ -6,6 +6,7 @@ import { ssPaper, ssPaperBatch } from './tools/paper.js';
 import { ssReferences, ssCitations } from './tools/references.js';
 import { ssRecommendations } from './tools/recommendations.js';
 import { ssAuthor, ssAuthorPapers } from './tools/author.js';
+import { ssRelevanceSearch } from './tools/search.js';
 
 const server = new McpServer({
   name: 'dare-ss',
@@ -18,7 +19,7 @@ const client = new SSClient(process.env.SS_API_KEY);
 
 server.tool(
   'ss_paper',
-  'Get details for a single paper from Semantic Scholar. Accepts S2 ID, ARXIV:xxx, DOI:xxx, PMID:xxx, URL:xxx formats.',
+  'Get details for a single paper from Semantic Scholar. Accepts S2 ID, ARXIV:xxx, DOI:xxx, PMID:xxx, URL:xxx formats. Bare arXiv IDs (e.g. 2005.14165) and DOIs (e.g. 10.xxx/...) are auto-prefixed.',
   {
     paper_id: z.string().describe('Paper ID (S2 ID, ARXIV:xxx, DOI:xxx, PMID:xxx, URL:xxx)'),
   },
@@ -144,6 +145,30 @@ server.tool(
       return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
     } catch (e: any) {
       return { isError: true, content: [{ type: 'text' as const, text: `ss_author_papers failed: ${e.message}` }] };
+    }
+  },
+);
+
+// ── Tool 8: ss_relevance_search ───────────────────────────────
+
+server.tool(
+  'ss_relevance_search',
+  'Search for papers by relevance using keywords or title. Returns ranked results with metadata.',
+  {
+    query: z.string().describe('Search keywords or paper title'),
+    limit: z.number().optional().describe('Max results (default 10, max 100)'),
+    offset: z.number().optional().describe('Pagination offset (default 0)'),
+    year: z.string().optional().describe('Year range filter (e.g. "2020-2024", "2020-", "-2023")'),
+    fields_of_study: z.string().optional().describe('Field filter (e.g. "Computer Science")'),
+    min_citation_count: z.number().optional().describe('Minimum citation count threshold'),
+    open_access_only: z.boolean().optional().describe('Only return papers with open access PDF'),
+  },
+  async (args) => {
+    try {
+      const result = await ssRelevanceSearch(client, args);
+      return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
+    } catch (e: any) {
+      return { isError: true, content: [{ type: 'text' as const, text: `ss_relevance_search failed: ${e.message}` }] };
     }
   },
 );
