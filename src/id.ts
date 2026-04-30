@@ -22,7 +22,7 @@ export function parsePaperId(input: string): ParsedPaperId {
 
   for (const prefix of PREFIXES) {
     if (trimmed.toLowerCase().startsWith(prefix.toLowerCase() + ':')) {
-      return { kind: prefix, raw: trimmed, formatted: trimmed };
+      return { kind: prefix, raw: trimmed, formatted: `${prefix}:${trimmed.slice(prefix.length + 1)}` };
     }
   }
 

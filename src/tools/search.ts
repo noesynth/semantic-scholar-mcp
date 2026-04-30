@@ -1,9 +1,7 @@
 import type { SSClient } from '../client.js';
 import { PAPER_FIELDS } from '../fields.js';
 
-// Search fields exclude openAccessPdf from the fields list so the openAccessPdf
-// filter param can be used unambiguously as a standalone query parameter.
-const SEARCH_FIELDS = PAPER_FIELDS.split(',').filter(f => f !== 'openAccessPdf').join(',');
+const SEARCH_FIELDS = PAPER_FIELDS;
 
 interface SearchArgs {
   query: string;

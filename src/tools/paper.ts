@@ -16,7 +16,7 @@ export async function ssPaperBatch(
   client: SSClient,
   args: { paper_ids: string[] },
 ): Promise<unknown> {
-  return client.post('/paper/batch', { ids: args.paper_ids }, {
+  return client.post('/paper/batch', { ids: args.paper_ids.map(id => parsePaperId(id).formatted) }, {
     fields: PAPER_FIELDS,
   });
 }

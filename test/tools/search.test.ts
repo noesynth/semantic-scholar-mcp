@@ -116,7 +116,18 @@ describe('ssRelevanceSearch', () => {
     expect(url).not.toContain('year=');
     expect(url).not.toContain('fieldsOfStudy=');
     expect(url).not.toContain('minCitationCount=');
-    expect(url).not.toContain('openAccessPdf');
+    expect(url).not.toMatch(/[?&]openAccessPdf(&|$|=)/);
+  });
+
+  it('includes openAccessPdf in fields (not stripped)', async () => {
+    globalThis.fetch = mockFetch([{ status: 200, body: SEARCH_RESPONSE }]);
+    const client = new SSClient();
+    await ssRelevanceSearch(client, { query: 'test' });
+
+    const url = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(url).toContain('fields=');
+    const fieldsParam = new URL(url).searchParams.get('fields')!;
+    expect(fieldsParam).toContain('openAccessPdf');
   });
 
   it('uses default limit=10 and offset=0', async () => {

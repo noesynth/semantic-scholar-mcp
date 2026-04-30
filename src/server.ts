@@ -10,7 +10,7 @@ import { ssRelevanceSearch } from './tools/search.js';
 
 const server = new McpServer({
   name: 'dare-ss',
-  version: '0.1.0',
+  version: '0.2.0',
 });
 
 const client = new SSClient(process.env.SS_API_KEY);

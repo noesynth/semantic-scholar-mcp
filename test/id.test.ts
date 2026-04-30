@@ -92,7 +92,7 @@ describe('parsePaperId', () => {
   it('is case-insensitive for prefixes', () => {
     const r = parsePaperId('arxiv:2005.14165');
     expect(r.kind).toBe('ARXIV');
-    expect(r.formatted).toBe('arxiv:2005.14165');
+    expect(r.formatted).toBe('ARXIV:2005.14165');
   });
 
   it('trims whitespace from input', () => {
