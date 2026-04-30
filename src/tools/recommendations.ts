@@ -1,6 +1,7 @@
 import type { SSClient } from '../client.js';
 import { PAPER_FIELDS } from '../fields.js';
 import { isSSError } from '../client.js';
+import { parsePaperId } from '../id.js';
 
 interface RecsArgs {
   positive_paper_ids: string[];
@@ -9,10 +10,10 @@ interface RecsArgs {
 }
 
 async function resolveToS2Id(client: SSClient, paperId: string): Promise<string | null> {
-  const hasPrefix = /^(ARXIV|DOI|PMID|PMCID|ACL|CorpusId|URL):/i.test(paperId);
-  if (!hasPrefix && /^[0-9a-f]{40}$/i.test(paperId)) return paperId;
+  const parsed = parsePaperId(paperId);
+  if (parsed.kind === 'S2') return parsed.formatted;
 
-  const result = await client.get<{ paperId: string }>(`/paper/${paperId}`, { fields: 'paperId' });
+  const result = await client.get<{ paperId: string }>(`/paper/${parsed.formatted}`, { fields: 'paperId' });
   if (isSSError(result)) return null;
   return result.paperId;
 }

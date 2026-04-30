@@ -104,6 +104,21 @@ describe('ssRecommendations', () => {
     expect(result.recommendedPapers).toHaveLength(2);
   });
 
+  it('auto-resolves bare arXiv ID (without ARXIV: prefix)', async () => {
+    globalThis.fetch = mockFetchSequence([
+      { status: 200, body: { paperId: 'resolved-bare-id' } },
+      { status: 200, body: RECS_RESPONSE },
+    ]);
+    const client = new SSClient();
+    const result = await ssRecommendations(client, {
+      positive_paper_ids: ['2005.14165'],
+    }) as any;
+
+    expect(result.recommendedPapers).toHaveLength(2);
+    const resolveUrl = (globalThis.fetch as any).mock.calls[0][0] as string;
+    expect(resolveUrl).toContain('/paper/ARXIV:2005.14165');
+  });
+
   it('clamps limit to 500', async () => {
     const s2Id = 'd'.repeat(40);
     globalThis.fetch = mockFetchSequence([
