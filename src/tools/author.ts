@@ -1,5 +1,5 @@
 import type { SSClient } from '../client.js';
-import { AUTHOR_FIELDS, PAPER_FIELDS } from '../fields.js';
+import { AUTHOR_FIELDS, PAPER_FIELDS_NO_TLDR } from '../fields.js';
 
 export async function ssAuthor(
   client: SSClient,
@@ -15,7 +15,7 @@ export async function ssAuthorPapers(
   args: { author_id: string; offset?: number; limit?: number },
 ): Promise<unknown> {
   const params: Record<string, string> = {
-    fields: PAPER_FIELDS,
+    fields: PAPER_FIELDS_NO_TLDR,
     offset: String(args.offset ?? 0),
     limit: String(Math.min(args.limit ?? 100, 1000)),
   };

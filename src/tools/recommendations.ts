@@ -1,5 +1,5 @@
 import type { SSClient } from '../client.js';
-import { PAPER_FIELDS } from '../fields.js';
+import { PAPER_FIELDS_NO_TLDR } from '../fields.js';
 import { isSSError } from '../client.js';
 import { parsePaperId } from '../id.js';
 
@@ -44,7 +44,7 @@ export async function ssRecommendations(
 
   const limit = Math.min(args.limit ?? 100, 500);
   return client.post('/papers/', body, {
-    fields: PAPER_FIELDS,
+    fields: PAPER_FIELDS_NO_TLDR,
     limit: String(limit),
   }, true);
 }
