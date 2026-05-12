@@ -3,11 +3,43 @@
   "version": "1.0.0",
   "description": "MCP server wrapping the Semantic Scholar Academic Graph API — paper lookup, citation tracing, recommendations, author info",
   "type": "module",
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "bin": {
+    "semantic-scholar-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "mcp": "tsx src/server.ts",
     "test": "vitest run",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build && npm test"
   },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "semantic-scholar",
+    "academic-graph",
+    "research",
+    "papers",
+    "citations",
+    "ai",
+    "llm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noesynth/semantic-scholar-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/noesynth/semantic-scholar-mcp/issues"
+  },
+  "homepage": "https://github.com/noesynth/semantic-scholar-mcp#readme",
+  "author": "noesynth",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
     "zod": "^4.3.6"
@@ -17,5 +49,8 @@
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
     "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

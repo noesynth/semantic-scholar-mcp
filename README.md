@@ -2,6 +2,18 @@
 
 Lightweight MCP server wrapping the [Semantic Scholar Academic Graph API](https://api.semanticscholar.org/graph/v1).
 
+## Installation
+
+```bash
+npm install @noesynth/semantic-scholar-mcp
+```
+
+Or use directly with `npx`:
+
+```bash
+npx @noesynth/semantic-scholar-mcp
+```
+
 ## Tools
 
 | Tool | Description |
@@ -17,32 +29,45 @@ Lightweight MCP server wrapping the [Semantic Scholar Academic Graph API](https:
 
 ## Setup
 
+### For Development
+
 ```bash
+git clone https://github.com/noesynth/semantic-scholar-mcp.git
+cd semantic-scholar-mcp
 npm install
+npm run build
 ```
 
-## Running
-
-```bash
-npm run mcp
-```
+### API Key (Optional)
 
 Set `SS_API_KEY` environment variable for higher rate limits (100 req/s vs 1 req/s unauthenticated).
 
-## MCP Config
+Get your API key at [Semantic Scholar API](https://www.semanticscholar.org/product/api).
+
+## Usage
+
+### With Claude Desktop / MCP Clients
+
+Add to your MCP configuration (e.g., `claude_desktop_config.json`):
 
 ```json
 {
   "mcpServers": {
     "semantic-scholar": {
       "command": "npx",
-      "args": ["tsx", "src/server.ts"],
+      "args": ["@noesynth/semantic-scholar-mcp"],
       "env": {
-        "SS_API_KEY": "<your-key>"
+        "SS_API_KEY": "<your-key-here>"
       }
     }
   }
 }
+```
+
+### Running Standalone
+
+```bash
+npm run mcp
 ```
 
 ## Testing
