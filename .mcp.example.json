@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "dare-ss": {
+    "semantic-scholar": {
       "type": "stdio",
       "command": "npx",
       "args": ["tsx", "src/server.ts"],
