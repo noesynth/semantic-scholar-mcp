@@ -125,4 +125,4 @@ Any MCP-compatible client can use this server:
 
 ## License
 
-Apache-2.0
+[Apache-2.0](./LICENSE)
