@@ -3,7 +3,7 @@
     "semantic-scholar": {
       "type": "stdio",
       "command": "npx",
-      "args": ["tsx", "src/server.ts"],
+      "args": ["@noesynth/semantic-scholar-mcp"],
       "env": {
         "SS_API_KEY": "<your-semantic-scholar-api-key-or-remove-this-line>"
       }
