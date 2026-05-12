@@ -1,0 +1,3 @@
+semantic-scholar-mcp
+
+Lightweight MCP server wrapping the Semantic Scholar Academic Graph API — paper lookup, citation tracing, recommendations, author info
