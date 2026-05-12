@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/noesynth/semantic-scholar-mcp#readme",
   "author": "noesynth",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
     "zod": "^4.3.6"

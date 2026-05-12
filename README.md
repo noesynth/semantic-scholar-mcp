@@ -125,4 +125,4 @@ Any MCP-compatible client can use this server:
 
 ## License
 
-MIT
+Apache-2.0
