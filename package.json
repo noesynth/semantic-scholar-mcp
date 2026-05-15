@@ -1,5 +1,5 @@
 {
-  "name": "@noesynth/semantic-scholar-mcp",
+  "name": "@yogsoth-ai/semantic-scholar-mcp",
   "version": "1.0.0",
   "description": "MCP server wrapping the Semantic Scholar Academic Graph API — paper lookup, citation tracing, recommendations, author info",
   "type": "module",
@@ -32,13 +32,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/noesynth/semantic-scholar-mcp.git"
+    "url": "https://github.com/yogsoth-ai/semantic-scholar-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/noesynth/semantic-scholar-mcp/issues"
+    "url": "https://github.com/yogsoth-ai/semantic-scholar-mcp/issues"
   },
-  "homepage": "https://github.com/noesynth/semantic-scholar-mcp#readme",
-  "author": "noesynth",
+  "homepage": "https://github.com/yogsoth-ai/semantic-scholar-mcp#readme",
+  "author": "yogsoth-ai",
   "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",

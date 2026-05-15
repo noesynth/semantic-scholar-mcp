@@ -18,7 +18,7 @@ Designed for AI assistants like Claude to help with literature review, citation 
 ## Installation
 
 ```bash
-npx @noesynth/semantic-scholar-mcp
+npx @yogsoth-ai/semantic-scholar-mcp
 ```
 
 No installation needed. The `npx` command downloads and runs the latest version automatically.
@@ -26,7 +26,7 @@ No installation needed. The `npx` command downloads and runs the latest version 
 Or install globally:
 
 ```bash
-npm install -g @noesynth/semantic-scholar-mcp
+npm install -g @yogsoth-ai/semantic-scholar-mcp
 ```
 
 ## Quick Start
@@ -44,7 +44,7 @@ Edit your MCP configuration file:
   "mcpServers": {
     "semantic-scholar": {
       "command": "npx",
-      "args": ["@noesynth/semantic-scholar-mcp"],
+      "args": ["@yogsoth-ai/semantic-scholar-mcp"],
       "env": {
         "SS_API_KEY": "optional-but-recommended"
       }
@@ -119,7 +119,7 @@ The `relevanceSearch` tool supports these filters:
 ### Local Development
 
 ```bash
-git clone https://github.com/noesynth/semantic-scholar-mcp.git
+git clone https://github.com/yogsoth-ai/semantic-scholar-mcp.git
 cd semantic-scholar-mcp
 npm install
 npm run build
@@ -138,8 +138,8 @@ Any MCP-compatible client can use this server. The configuration is the same JSO
 
 ## Links
 
-- 📦 [npm package](https://www.npmjs.com/package/@noesynth/semantic-scholar-mcp)
-- 🐙 [GitHub repository](https://github.com/noesynth/semantic-scholar-mcp)
+- 📦 [npm package](https://www.npmjs.com/package/@yogsoth-ai/semantic-scholar-mcp)
+- 🐙 [GitHub repository](https://github.com/yogsoth-ai/semantic-scholar-mcp)
 - 📚 [Semantic Scholar API Docs](https://api.semanticscholar.org/api-docs/graph)
 - 🔧 [Model Context Protocol](https://modelcontextprotocol.io)
 
