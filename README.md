@@ -143,6 +143,6 @@ Any MCP-compatible client can use this server. The configuration is the same JSO
 - 📚 [Semantic Scholar API Docs](https://api.semanticscholar.org/api-docs/graph)
 - 🔧 [Model Context Protocol](https://modelcontextprotocol.io)
 
-## License
+## 📄 License
 
-[Apache-2.0](./LICENSE)
+[Apache-2.0](LICENSE)
